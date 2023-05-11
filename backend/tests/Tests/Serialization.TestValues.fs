@@ -40,7 +40,6 @@ module RuntimeTypes =
       RT.TList RT.TInt
       RT.TTuple(RT.TBool, RT.TBool, [ RT.TBool ])
       RT.TDict RT.TBool
-      RT.THttpResponse RT.TBool
       RT.TDB RT.TBool
       RT.TCustomType(
         RT.FQTypeName.User { modules = []; typ = "User"; version = 0 },
@@ -154,9 +153,6 @@ module RuntimeTypes =
   let dvalSources : List<RT.DvalSource> =
     [ RT.SourceNone; RT.SourceID(123UL, 91293UL) ]
 
-  let dvalHttpResponses : List<RT.Dval> =
-    [ RT.DHttpResponse(8123, [ "a", "b" ], RT.DUnit) ]
-
   let dvals : List<RT.Dval> =
     // TODO: is this exhaustive? I haven't checked.
     sampleDvals
@@ -208,7 +204,6 @@ module ProgramTypes =
       PT.TList PT.TInt
       PT.TTuple(PT.TBool, PT.TBool, [ PT.TBool ])
       PT.TDict PT.TBool
-      PT.THttpResponse PT.TBool
       PT.TDB PT.TBool
       PT.TCustomType(
         PT.FQTypeName.User { modules = [ "Mod" ]; typ = "User"; version = 0 },
@@ -515,11 +510,7 @@ module ProgramTypes =
     PT.TTuple(
       PT.TList(
         PT.TDict(
-          PT.TDB(
-            PT.THttpResponse(
-              PT.TOption(PT.TResult(PT.TInt, PT.TFn([ PT.TFloat ], PT.TUnit)))
-            )
-          )
+          PT.TDB(PT.TOption(PT.TResult(PT.TInt, PT.TFn([ PT.TFloat ], PT.TUnit))))
         )
       ),
       PT.TInt,
@@ -530,7 +521,6 @@ module ProgramTypes =
         PT.TList(PT.TInt)
         PT.TTuple(PT.TInt, PT.TString, [])
         PT.TDict(PT.TInt)
-        PT.THttpResponse(PT.TInt)
         PT.TDB(PT.TInt)
         PT.TDateTime
         PT.TChar
