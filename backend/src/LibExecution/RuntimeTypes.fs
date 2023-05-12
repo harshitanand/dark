@@ -767,6 +767,9 @@ module PackageFn =
       returnType : TypeReference
       body : Expr }
 
+module PackageType =
+  type T = { name : FQTypeName.PackageTypeName; definition : CustomType.T }
+
 
 // <summary>
 // Used to mark whether a function can be run on the client rather than backend.
@@ -952,8 +955,8 @@ and Libraries =
   { stdlibTypes : Map<FQTypeName.StdlibTypeName, BuiltInType>
     stdlibFns : Map<FQFnName.StdlibFnName, BuiltInFn>
 
-    // TODO: package types
-    packageFns : Map<FQFnName.PackageFnName, PackageFn.T> }
+    packageFns : Map<FQFnName.PackageFnName, PackageFn.T>
+    packageTypes : Map<FQTypeName.PackageTypeName, PackageType.T> }
 
 and ExceptionReporter = ExecutionState -> Metadata -> exn -> unit
 

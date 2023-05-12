@@ -19,6 +19,7 @@ let getStateForEval
   (fns : List<UserFunction.T>)
   : ExecutionState =
   let packageFns = Map.empty // TODO
+  let packageTypes = Map.empty // TODO
 
   let libraries : Libraries =
     let stdlibFns, stdlibTypes =
@@ -28,10 +29,10 @@ let getStateForEval
         []
 
     { stdlibTypes = stdlibTypes |> List.map (fun typ -> typ.name, typ) |> Map
-
       stdlibFns = stdlibFns |> List.map (fun fn -> fn.name, fn) |> Map
 
-      packageFns = packageFns }
+      packageFns = packageFns
+      packageTypes = packageTypes }
 
   let program : ProgramContext =
     { canvasID = CanvasID.Empty
