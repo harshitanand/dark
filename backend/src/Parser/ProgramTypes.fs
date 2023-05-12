@@ -979,7 +979,7 @@ module PackageFn =
     (owner : string)
     (modules : NonEmptyList<string>)
     (b : SynBinding)
-    : PT.Package.Fn =
+    : PT.PackageFn.T =
     let f = Function.fromSynBinding b
     { tlid = gid ()
       id = System.Guid.NewGuid()
@@ -994,7 +994,7 @@ module PackageFn =
       deprecated = PT.NotDeprecated
       body = f.body }
 
-  let completeParse (f : PT.Package.Fn) : PT.Package.Fn =
+  let completeParse (f : PT.PackageFn.T) : PT.PackageFn.T =
     { tlid = f.tlid
       id = f.id
       name = f.name

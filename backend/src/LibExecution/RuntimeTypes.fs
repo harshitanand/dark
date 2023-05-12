@@ -756,10 +756,10 @@ module Secret =
 // Functions
 // ------------
 
-module Package =
+module PackageFn =
   type Parameter = { name : string; typ : TypeReference }
 
-  type Fn =
+  type T =
     { name : FQFnName.PackageFnName
       tlid : tlid
       typeParams : List<string>
@@ -953,7 +953,7 @@ and Libraries =
     stdlibFns : Map<FQFnName.StdlibFnName, BuiltInFn>
 
     // TODO: package types
-    packageFns : Map<FQFnName.PackageFnName, Package.Fn> }
+    packageFns : Map<FQFnName.PackageFnName, PackageFn.T> }
 
 and ExceptionReporter = ExecutionState -> Metadata -> exn -> unit
 
@@ -1043,8 +1043,8 @@ let userFnToFn (fn : UserFunction.T) : Fn =
     sqlSpec = NotQueryable
     fn = UserFunction(fn.tlid, fn.body) }
 
-let packageFnToFn (fn : Package.Fn) : Fn =
-  let toParam (p : Package.Parameter) : Param = { name = p.name; typ = p.typ }
+let packageFnToFn (fn : PackageFn.T) : Fn =
+  let toParam (p : PackageFn.Parameter) : Param = { name = p.name; typ = p.typ }
 
   { name = FQFnName.Package fn.name
     typeParams = fn.typeParams
